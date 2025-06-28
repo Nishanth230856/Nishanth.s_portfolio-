@@ -5,6 +5,7 @@
   <title>Nishanth | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     * {
       margin: 0;
@@ -184,7 +185,6 @@
       }
     }
 
-    /* Rest of your existing styles... */
     .header-content {
       display: flex;
       flex-direction: column;
@@ -253,7 +253,6 @@
       60% { transform: translateY(-10px) translateX(-50%); }
     }
 
-    /* Rest of your existing styles... */
     nav {
       background: rgba(17, 17, 17, 0.9);
       padding: 15px 0;
@@ -1073,6 +1072,249 @@
       transform: translateY(-2px);
     }
 
+    /* Login Toggle Button */
+    .login-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 191, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 191, 255, 0.3);
+    }
+
+    .login-toggle:hover {
+      background: rgba(0, 191, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .login-toggle i {
+      color: #00bfff;
+      font-size: 1.2em;
+    }
+
+    /* Login Overlay */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(5px);
+    }
+
+    .login-container {
+      width: 400px;
+      height: 480px;
+      position: relative;
+    }
+
+    .login-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #a2a2a2;
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+
+    .login-close:hover {
+      color: #00bfff;
+      transform: rotate(90deg);
+    }
+
+    .login-icon {
+      position: absolute;
+      width: 85px;
+      font-size: 50px;
+      display: grid;
+      height: 85px;
+      place-content: center;
+      border: 1px solid #2a2a2a;
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #0e0e0e;
+      color: #a2a2a2;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      padding: 25px 25px 10px;
+      height: 440px;
+      border-radius: 30px;
+      background: rgba(19, 19, 19, 0.9);
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .login-title {
+      position: relative;
+      margin: 40px 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00bfff;
+      text-align: center;
+    }
+
+    .login-msg {
+      color: #fa2929;
+      position: absolute;
+      top: 25%;
+      text-align: center;
+      width: 100%;
+    }
+
+    .login-field {
+      display: flex;
+      position: relative;
+      width: 100%;
+      margin: 25px 0 5px;
+    }
+
+    .login-field .fa {
+      position: absolute;
+      font-size: 14px;
+      right: 10px;
+      bottom: 10px;
+      color: #a2a2a2;
+    }
+
+    .login-field input {
+      display: block;
+      outline: none;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      color: #d2d2d2;
+      caret-color: #cccccc;
+      background: transparent;
+      padding: 10px 25px 3px 0;
+      border-bottom: 1px solid #404040;
+      transition: all 0.3s;
+    }
+
+    .login-field input:focus {
+      border-bottom-color: #00bfff;
+    }
+
+    .login-action {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .login-action label {
+      cursor: pointer;
+      color: #7d7d7d;
+      display: flex;
+      align-items: center;
+    }
+
+    .login-action input {
+      width: auto;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+    }
+
+    .login-action a {
+      text-decoration: none;
+      color: #9b9b9b;
+      transition: all 0.3s;
+    }
+
+    .login-action a:hover {
+      color: #00bfff;
+    }
+
+    .login-btn-container {
+      padding: 20px;
+      transition: .2s linear;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    #login-submit-btn {
+      padding: 10px 30px;
+      border: none;
+      background: linear-gradient(135deg, #00bfff, #0082c8);
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 25px;
+      transition: .3s;
+      margin: 25px 0;
+      cursor: pointer;
+      width: auto;
+    }
+
+    #login-submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+    }
+
+    .login-signup {
+      color: rgb(70, 70, 70);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .login-signup a {
+      color: #9b9b9b;
+      text-decoration: none;
+      transition: all 0.3s;
+      margin-left: 5px;
+    }
+
+    .login-signup a:hover {
+      color: #00bfff;
+    }
+
+    /* Shift animations for the login button */
+    .login-shift-left {
+      transform: translateX(-120%);
+    }
+
+    .login-shift-right {
+      transform: translateX(120%);
+    }
+
+    .login-shift-top {
+      transform: translateY(-150%);
+    }
+
+    .login-shift-bottom {
+      transform: translateY(150%);
+    }
+
+    .login-no-shift {
+      transform: translate(0%, 0%);
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2.5em;
@@ -1132,6 +1374,11 @@
       .screenshot-overlay p {
         font-size: 1em;
       }
+
+      .login-container {
+        width: 90%;
+        max-width: 350px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1165,6 +1412,15 @@
 
       .screenshot-overlay p {
         font-size: 0.9em;
+      }
+
+      .login-title {
+        font-size: 18px;
+        margin: 30px 0;
+      }
+
+      .login-form {
+        padding: 20px 15px 10px;
       }
     }
 
@@ -1214,9 +1470,43 @@
   <a href="#hobbies">Hobbies</a>
   <a href="#project">Projects</a>
   <a href="#contact">Contact</a>
+  <div class="login-toggle" onclick="toggleLoginForm()">
+    <i class="fas fa-sign-in-alt"></i>
+  </div>
 </nav>
 
-<!-- Rest of your HTML content remains the same... -->
+<!-- Login Form Overlay -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-container">
+    <div class="login-close" onclick="toggleLoginForm()">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="login-icon fa fa-user"></div>
+    <form class="login-form">
+      <div class="login-title">LOGIN</div>
+      <div class="login-msg"></div>
+      <div class="login-field">
+        <input type="text" placeholder="Username" id="login-uname">
+        <span class="fa fa-user"></span>
+      </div>
+      <div class="login-field">
+        <input type="password" placeholder="Password" id="login-pass">
+        <span class="fa fa-lock"></span>
+      </div>
+      <div class="login-action">
+        <label for="login-remember" class="centered-flex">
+          <input type="checkbox" id="login-remember"> Remember me
+        </label>
+        <a href="#">Forget Password ?</a>
+      </div>
+      <div class="login-btn-container">
+        <input type="submit" id="login-submit-btn" value="Login">
+      </div>
+      <div class="login-signup">Don't have an Account?<a href="#"> Sign up</a></div>
+    </form>
+  </div>
+</div>
+
 <section class="section" id="about">
   <h2>About Me</h2>
   <p>I'm a passionate front-end developer with expertise in modern web technologies, currently pursuing a Diploma in Information Technology. With a strong foundation in programming and design, I create intuitive and visually appealing digital experiences.</p>
@@ -1472,7 +1762,6 @@
       <i class="fab fa-github"></i> View on GitHub
     </a>
   </div>
-  
 </section>
 
 <section class="section" id="contact">
@@ -1501,7 +1790,6 @@
     <a href="https://www.instagram.com/_future_kd_king_1619_/profilecard/?igsh=YWkzOXUxYjV5bm93" class="contact-link" target="_blank" title="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
-    
   </div>
   
   <form style="margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -1528,6 +1816,70 @@
 </footer>
 
 <script>
+  // Login Form Functionality
+  function toggleLoginForm() {
+    const overlay = document.getElementById('loginOverlay');
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  const loginUname = document.querySelector('#login-uname');
+  const loginPass = document.querySelector('#login-pass');
+  const loginBtnContainer = document.querySelector('.login-btn-container');
+  const loginBtn = document.querySelector('#login-submit-btn');
+  const loginForm = document.querySelector('.login-form');
+  const loginMsg = document.querySelector('.login-msg');
+  loginBtn.disabled = true;
+
+  function shiftLoginButton() {
+    showLoginMsg();
+    const positions = ['login-shift-left', 'login-shift-top', 'login-shift-right', 'login-shift-bottom'];
+    const currentPosition = positions.find(dir => loginBtn.classList.contains(dir));
+    const nextPosition = positions[(positions.indexOf(currentPosition) + 1) % positions.length];
+    if (currentPosition) loginBtn.classList.remove(currentPosition);
+    loginBtn.classList.add(nextPosition);
+  }
+
+  function showLoginMsg() {
+    const isEmpty = loginUname.value === '' || loginPass.value === '';
+    loginBtn.classList.toggle('login-no-shift', !isEmpty);
+
+    if (isEmpty) {
+      loginBtn.disabled = true;
+      loginMsg.style.color = 'rgb(218 49 49)';
+      loginMsg.innerText = 'Please fill the input fields before proceeding';
+    } else {
+      loginMsg.innerText = 'Great! Now you can proceed';
+      loginMsg.style.color = '#92ff92';
+      loginBtn.disabled = false;
+      loginBtn.classList.add('login-no-shift');
+    }
+  }
+
+  loginBtnContainer.addEventListener('mouseover', shiftLoginButton);
+  loginBtn.addEventListener('mouseover', shiftLoginButton);
+  loginForm.addEventListener('input', showLoginMsg);
+  loginBtn.addEventListener('touchstart', shiftLoginButton);
+
+  // Handle form submission
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Here you would typically validate and send the login data to your server
+    const username = loginUname.value;
+    const password = loginPass.value;
+    
+    // For demo purposes, we'll just show a success message
+    loginMsg.innerText = 'Login successful! Redirecting...';
+    loginMsg.style.color = '#92ff92';
+    
+    // Simulate a redirect after 2 seconds
+    setTimeout(() => {
+      toggleLoginForm();
+      loginForm.reset();
+      loginMsg.innerText = '';
+    }, 2000);
+  });
+
   // Create floating particles and connections
   function createParticleNetwork() {
     const container = document.getElementById('particleNetwork');
@@ -1637,10 +1989,10 @@
     
     animate();
   }
-  
+
   // Intersection Observer for scroll animations
   const sections = document.querySelectorAll('.section');
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1648,7 +2000,7 @@
       }
     });
   }, { threshold: 0.1 });
-  
+
   sections.forEach(section => {
     observer.observe(section);
   });
@@ -1673,11 +2025,11 @@
       this.classList.add('active');
     });
   });
-  
+
   // Form submission handling
-  const form = document.querySelector('form');
-  if (form) {
-    form.addEventListener('submit', function(e) {
+  const contactForm = document.querySelector('#contact form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       
       // Get form values
@@ -1690,10 +2042,10 @@
       
       // Show success message
       alert('Thank you for your message! I will get back to you soon.');
-      form.reset();
+      contactForm.reset();
     });
   }
-  
+
   // Initialize animations when DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     createParticleNetwork();
@@ -1724,4 +2076,4 @@
 </script>
 
 </body>
-  </html>
+</html>
