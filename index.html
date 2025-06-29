@@ -6,21 +6,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      /* Dark mode colors */
+      --bg-color: #0f0f0f;
+      --text-color: #ffffff;
+      --accent-color: #00bfff;
+      --secondary-accent: #8a2be2;
+      --tertiary-accent: #ff0080;
+      --card-bg: rgba(26, 26, 26, 0.7);
+      --nav-bg: rgba(17, 17, 17, 0.9);
+      --footer-bg: #111;
+      --footer-text: #777;
+      --form-bg: #1a1a1a;
+      --form-border: #333;
+      --shadow-color: rgba(0,0,0,0.7);
+      --skill-front-bg: rgba(26, 26, 26, 0.8);
+      --timeline-bg: rgba(26, 26, 26, 0.7);
+      --project-bg: rgba(26, 26, 26, 0.7);
+      --hobby-bg: rgba(26, 26, 26, 0.7);
+      --text-muted: #ccc;
+    }
+
+    /* Light mode colors */
+    [data-theme="light"] {
+      --bg-color: #f5f7fa;
+      --text-color: #333333;
+      --accent-color: #007acc;
+      --secondary-accent: #6a3093;
+      --tertiary-accent: #d6336c;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --nav-bg: rgba(245, 245, 245, 0.9);
+      --footer-bg: #e0e0e0;
+      --footer-text: #555;
+      --form-bg: #ffffff;
+      --form-border: #ddd;
+      --shadow-color: rgba(0,0,0,0.1);
+      --skill-front-bg: rgba(255, 255, 255, 0.9);
+      --timeline-bg: rgba(255, 255, 255, 0.9);
+      --project-bg: rgba(255, 255, 255, 0.9);
+      --hobby-bg: rgba(255, 255, 255, 0.9);
+      --text-muted: #666;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #0f0f0f;
-      color: #ffffff;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* Enhanced Header with Futuristic Animations */
+    /* Theme toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-toggle i {
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    [data-theme="light"] .theme-toggle {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Header styles */
     header {
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       padding: 60px 20px;
@@ -33,6 +104,10 @@
       justify-content: center;
       align-items: center;
       isolation: isolate;
+    }
+
+    [data-theme="light"] header {
+      background: linear-gradient(135deg, #e0f7fa, #80deea, #4dd0e1);
     }
 
     .futuristic-bg {
@@ -200,7 +275,7 @@
       font-size: 4.5em;
       color: #fff;
       margin-bottom: 15px;
-      background: linear-gradient(90deg, #00bfff, #8a2be2, #ff0080);
+      background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent), var(--tertiary-accent));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -225,6 +300,11 @@
       padding: 15px 25px;
       border-radius: 30px;
       backdrop-filter: blur(5px);
+    }
+
+    [data-theme="light"] header p {
+      color: rgba(51, 51, 51, 0.9);
+      background: rgba(255, 255, 255, 0.7);
     }
 
     .scroll-down {
@@ -254,20 +334,19 @@
       100% { box-shadow: 0 0 0 15px rgba(0, 191, 255, 0); }
     }
 
-    /* Rest of your existing styles */
     nav {
-      background: rgba(17, 17, 17, 0.9);
+      background: var(--nav-bg);
       padding: 15px 0;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.7);
+      box-shadow: 0 2px 20px var(--shadow-color);
       backdrop-filter: blur(10px);
     }
 
     nav a {
-      color: #fff;
+      color: var(--text-color);
       margin: 0 20px;
       text-decoration: none;
       font-weight: bold;
@@ -290,7 +369,7 @@
     }
 
     nav a:hover {
-      color: #00bfff;
+      color: var(--accent-color);
       text-shadow: 0 0 15px rgba(0,191,255,0.8);
     }
 
@@ -305,7 +384,7 @@
       height: 2px;
       bottom: 0;
       left: 0;
-      background: linear-gradient(to right, transparent, #00bfff, transparent);
+      background: linear-gradient(to right, transparent, var(--accent-color), transparent);
       transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -331,7 +410,7 @@
       transform: translateX(-50%);
       width: 0;
       height: 3px;
-      background: linear-gradient(to right, transparent, #00bfff, transparent);
+      background: linear-gradient(to right, transparent, var(--accent-color), transparent);
       transition: width 0.8s;
     }
 
@@ -345,7 +424,7 @@
     }
 
     .section h2 {
-      color: #00bfff;
+      color: var(--accent-color);
       margin-bottom: 30px;
       padding-bottom: 10px;
       position: relative;
@@ -360,7 +439,7 @@
       height: 3px;
       bottom: 0;
       left: 0;
-      background: linear-gradient(to right, transparent, #00bfff, #00bfff, transparent);
+      background: linear-gradient(to right, transparent, var(--accent-color), var(--accent-color), transparent);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -385,7 +464,7 @@
       content: '▹';
       position: absolute;
       left: 0;
-      color: #00bfff;
+      color: var(--accent-color);
       font-size: 1.5em;
       line-height: 1;
       animation: pulse 1.5s infinite;
@@ -393,7 +472,7 @@
 
     .btn {
       display: inline-block;
-      background: linear-gradient(135deg, #00bfff, #0082c8);
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
       color: #000;
       padding: 15px 30px;
       text-decoration: none;
@@ -416,7 +495,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #0082c8, #00bfff);
+      background: linear-gradient(135deg, var(--secondary-accent), var(--accent-color));
       z-index: -1;
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -463,8 +542,8 @@
     footer {
       text-align: center;
       padding: 40px;
-      background: #111;
-      color: #777;
+      background: var(--footer-bg);
+      color: var(--footer-text);
       position: relative;
       overflow: hidden;
     }
@@ -476,7 +555,7 @@
       left: 0;
       width: 100%;
       height: 1px;
-      background: linear-gradient(to right, transparent, #00bfff, transparent);
+      background: linear-gradient(to right, transparent, var(--accent-color), transparent);
     }
 
     footer p {
@@ -545,7 +624,7 @@
       border-radius: 20px;
       padding: 15px;
       box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
-      background: rgba(26, 26, 26, 0.8);
+      background: var(--skill-front-bg);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -556,7 +635,7 @@
 
     .skill-icon-back {
       transform: rotateY(180deg);
-      background: linear-gradient(135deg, #00bfff, #0082c8);
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
       color: #000;
     }
 
@@ -577,7 +656,7 @@
     .skill-icon span {
       font-size: 1em;
       font-weight: 600;
-      color: #fff;
+      color: var(--text-color);
       text-align: center;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -594,7 +673,7 @@
       left: -5px;
       right: -5px;
       bottom: -5px;
-      background: linear-gradient(45deg, #00bfff, #0082c8, #00bfff);
+      background: linear-gradient(45deg, var(--accent-color), var(--secondary-accent), var(--accent-color));
       z-index: -1;
       border-radius: 25px;
       opacity: 0;
@@ -629,25 +708,25 @@
       box-shadow: 0 10px 30px rgba(0,191,255,0.2);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       margin: 30px auto;
-      border: 2px solid #333;
+      border: 2px solid var(--form-border);
       display: block;
     }
 
     .project-image:hover {
       transform: scale(1.03) rotate(1deg);
       box-shadow: 0 20px 50px rgba(0,191,255,0.6);
-      border-color: #00bfff;
+      border-color: var(--accent-color);
     }
 
     .project-details {
-      background: rgba(26, 26, 26, 0.7);
+      background: var(--project-bg);
       padding: 30px;
       border-radius: 12px;
       margin: 30px 0;
-      border-left: 5px solid #00bfff;
+      border-left: 5px solid var(--accent-color);
       backdrop-filter: blur(5px);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 15px var(--shadow-color);
       position: relative;
       overflow: hidden;
     }
@@ -670,11 +749,11 @@
     .project-details:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(0,191,255,0.4);
-      background: rgba(26, 26, 26, 0.9);
+      background: var(--project-bg);
     }
 
     .project-details h3 {
-      color: #00bfff;
+      color: var(--accent-color);
       margin-bottom: 15px;
       font-size: 1.5em;
       position: relative;
@@ -688,7 +767,7 @@
       left: 0;
       width: 50px;
       height: 2px;
-      background: #00bfff;
+      background: var(--accent-color);
       transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -699,6 +778,11 @@
     .project-details p {
       margin-bottom: 20px;
       line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    [data-theme="light"] .project-details p {
+      color: var(--text-color);
     }
 
     .project-features {
@@ -706,7 +790,7 @@
     }
 
     .project-features h4 {
-      color: #00bfff;
+      color: var(--accent-color);
       margin-bottom: 15px;
       font-size: 1.2em;
     }
@@ -720,7 +804,7 @@
     }
 
     .contact-link {
-      color: #fff;
+      color: var(--text-color);
       font-size: 2em;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
@@ -746,7 +830,7 @@
     }
 
     .contact-link:hover {
-      color: #00bfff;
+      color: var(--accent-color);
       transform: translateY(-5px) scale(1.2);
       box-shadow: 0 10px 25px rgba(0,191,255,0.4);
     }
@@ -760,7 +844,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border: 2px solid #00bfff;
+      border: 2px solid var(--accent-color);
       border-radius: 50%;
       animation: ripple 1.5s infinite;
       opacity: 0;
@@ -785,16 +869,16 @@
       left: 20px;
       height: 100%;
       width: 2px;
-      background: linear-gradient(to bottom, #00bfff, transparent);
+      background: linear-gradient(to bottom, var(--accent-color), transparent);
     }
 
     .timeline-item {
       position: relative;
       margin-bottom: 40px;
       padding: 20px;
-      background: rgba(26, 26, 26, 0.7);
+      background: var(--timeline-bg);
       border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 15px var(--shadow-color);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       overflow: hidden;
     }
@@ -827,7 +911,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #00bfff;
+      background: var(--accent-color);
       box-shadow: 0 0 15px rgba(0,191,255,0.8);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -838,7 +922,7 @@
     }
 
     .timeline-date {
-      color: #00bfff;
+      color: var(--accent-color);
       font-weight: bold;
       margin-bottom: 10px;
       transition: all 0.3s;
@@ -850,21 +934,21 @@
 
     .timeline-content h3 {
       margin-bottom: 10px;
-      color: #fff;
+      color: var(--text-color);
       transition: all 0.3s;
     }
 
     .timeline-item:hover .timeline-content h3 {
-      color: #00bfff;
+      color: var(--accent-color);
     }
 
     .timeline-content p {
-      color: #ccc;
+      color: var(--text-muted);
       transition: all 0.3s;
     }
 
     .timeline-item:hover .timeline-content p {
-      color: #fff;
+      color: var(--text-color);
     }
 
     /* Hobbies Section Styles */
@@ -877,15 +961,15 @@
     }
 
     .hobby-card {
-      background: rgba(26, 26, 26, 0.7);
+      background: var(--hobby-bg);
       border-radius: 12px;
       padding: 25px;
       width: 300px;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
-      border: 1px solid #333;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid var(--form-border);
+      box-shadow: 0 5px 15px var(--shadow-color);
     }
 
     .hobby-card::before {
@@ -906,7 +990,7 @@
     .hobby-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 20px 40px rgba(0,191,255,0.3);
-      border-color: #00bfff;
+      border-color: var(--accent-color);
     }
 
     .hobby-card::after {
@@ -916,7 +1000,7 @@
       left: 0;
       width: 100%;
       height: 5px;
-      background: linear-gradient(to right, #00bfff, #0082c8);
+      background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -927,7 +1011,7 @@
 
     .hobby-icon {
       font-size: 3em;
-      color: #00bfff;
+      color: var(--accent-color);
       margin-bottom: 15px;
       text-align: center;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -941,7 +1025,7 @@
     }
 
     .hobby-card h3 {
-      color: #00bfff;
+      color: var(--accent-color);
       margin-bottom: 15px;
       text-align: center;
       font-size: 1.5em;
@@ -955,7 +1039,7 @@
     }
 
     .hobby-card p {
-      color: #ccc;
+      color: var(--text-muted);
       text-align: center;
       line-height: 1.6;
       position: relative;
@@ -964,11 +1048,11 @@
     }
 
     .hobby-card:hover p {
-      color: #fff;
+      color: var(--text-color);
     }
 
     .ffmax-highlight {
-      color: #00bfff;
+      color: var(--accent-color);
       font-weight: bold;
       text-shadow: 0 0 5px rgba(0,191,255,0.5);
     }
@@ -1037,7 +1121,7 @@
     .screenshot-overlay h3 {
       font-size: 1.8em;
       margin-bottom: 10px;
-      color: #00bfff;
+      color: var(--accent-color);
       text-shadow: 0 0 15px rgba(0,191,255,0.8);
     }
 
@@ -1049,7 +1133,7 @@
 
     .gaming-stats-description {
       margin-top: 20px;
-      color: #ccc;
+      color: var(--text-muted);
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
@@ -1057,19 +1141,26 @@
     }
 
     .gaming-showcase:hover .gaming-stats-description {
-      color: #fff;
+      color: var(--text-color);
     }
 
     /* Form Styles */
     form input,
     form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid var(--form-border);
+      background: var(--form-bg);
+      color: var(--text-color);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin-bottom: 20px;
     }
 
     form input:focus,
     form textarea:focus {
       outline: none;
-      border-color: #00bfff;
+      border-color: var(--accent-color);
       box-shadow: 0 0 10px rgba(0,191,255,0.3);
       transform: translateY(-2px);
     }
@@ -1167,6 +1258,13 @@
       .screenshot-overlay p {
         font-size: 0.9em;
       }
+
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+      }
     }
 
     @keyframes fadeInDown {
@@ -1192,6 +1290,11 @@
   </style>
 </head>
 <body>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle">
+  <i class="fas fa-moon"></i>
+</button>
 
 <!-- Futuristic Background Animation -->
 <div class="futuristic-bg">
@@ -1414,7 +1517,7 @@
   </div>
   
   <div class="gaming-showcase">
-    <h3 style="color: #00bfff; margin-bottom: 20px;">My FF Max Gaming Stats</h3>
+    <h3 style="color: var(--accent-color); margin-bottom: 20px;">My FF Max Gaming Stats</h3>
     <div class="screenshot-container">
       <img src="IMG_20250626_215052.jpg" alt="FF Max Gaming Stats">
       <div class="screenshot-overlay">
@@ -1491,7 +1594,7 @@
   <h2>Get In Touch</h2>
   <p>I'm currently looking for internship opportunities and collaborative projects. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
   
-  <p><strong>Email:</strong> <a href="mailto:Nishanthnish89@email.com" style="color:#00bfff; text-decoration: none;">Nishanthnish89@email.com</a></p>
+  <p><strong>Email:</strong> <a href="mailto:Nishanthnish89@email.com" style="color:var(--accent-color); text-decoration: none;">Nishanthnish89@email.com</a></p>
   <p><strong>Phone:</strong> +91 93456 86804</p>
   <p><strong>Location:</strong> Coimbatore, Tamil Nadu, India</p>
   
@@ -1507,27 +1610,26 @@
     </a>
     <a href="https://x.com/NishNishan49952?t=PqbbWgN8QT461MZD53Gotw&s=09" class="contact-link" target="_blank" title="X (Twitter)">
       <svg width="20" height="20" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="white"/>
+        <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="currentColor"/>
       </svg>
     </a>
     <a href="https://www.instagram.com/_future_kd_king_1619_/profilecard/?igsh=YWkzOXUxYjV5bm93" class="contact-link" target="_blank" title="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
-    
   </div>
   
   <form style="margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
     <div style="margin-bottom: 20px;">
-      <label for="name" style="display: block; margin-bottom: 8px; color: #00bfff;">Name</label>
-      <input type="text" id="name" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #333; background: #1a1a1a; color: white; transition: all 0.3s;">
+      <label for="name" style="display: block; margin-bottom: 8px; color: var(--accent-color);">Name</label>
+      <input type="text" id="name" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid var(--form-border); background: var(--form-bg); color: var(--text-color); transition: all 0.3s;">
     </div>
     <div style="margin-bottom: 20px;">
-      <label for="email" style="display: block; margin-bottom: 8px; color: #00bfff;">Email</label>
-      <input type="email" id="email" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #333; background: #1a1a1a; color: white; transition: all 0.3s;">
+      <label for="email" style="display: block; margin-bottom: 8px; color: var(--accent-color);">Email</label>
+      <input type="email" id="email" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid var(--form-border); background: var(--form-bg); color: var(--text-color); transition: all 0.3s;">
     </div>
     <div style="margin-bottom: 20px;">
-      <label for="message" style="display: block; margin-bottom: 8px; color: #00bfff;">Message</label>
-      <textarea id="message" rows="5" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #333; background: #1a1a1a; color: white; transition: all 0.3s;"></textarea>
+      <label for="message" style="display: block; margin-bottom: 8px; color: var(--accent-color);">Message</label>
+      <textarea id="message" rows="5" style="width: 100%; padding: 12px; border-radius: 5px; border: 1px solid var(--form-border); background: var(--form-bg); color: var(--text-color); transition: all 0.3s;"></textarea>
     </div>
     <button type="submit" class="btn" style="width: 100%;">
       <i class="fas fa-paper-plane"></i> Send Message
@@ -1540,6 +1642,38 @@
 </footer>
 
 <script>
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const icon = themeToggle.querySelector('i');
+
+  // Check for saved theme preference or use preferred color scheme
+  const currentTheme = localStorage.getItem('theme') || 
+    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  
+  // Apply the current theme
+  body.setAttribute('data-theme', currentTheme);
+  updateIcon();
+
+  // Toggle theme on button click
+  themeToggle.addEventListener('click', () => {
+    const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateIcon();
+  });
+
+  function updateIcon() {
+    const theme = body.getAttribute('data-theme');
+    if (theme === 'dark') {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  }
+
   // Enhanced particle wave animation
   function createParticleWave() {
     const container = document.getElementById('particleWave');
@@ -1698,4 +1832,4 @@
 </script>
 
 </body>
-      </html>
+</html>
